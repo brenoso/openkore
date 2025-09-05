@@ -1,0 +1,140 @@
+###########################################################################
+## CONFIGURAÇÕES GERAIS DO USUÁRIO
+###########################################################################
+#sub configurarParametrosUsuario {
+#    my %parametrosUsuario = (
+#        pesoParaVender    => 70,
+#        hpParaUsarPocao   => 60,
+#        pocaoParaUsar     => 'Poção Amarela',
+#        minPocao          => 10,
+#        maxPocao          => 200,
+#        zenyMinPot        => 5000,
+#        asaRetorno        => 'Asa de Borboleta',
+#        usarAsaParaCompra => 1,
+#    );
+#    return \%parametrosUsuario;
+#}
+#
+##-------------------------------------------------------------------------------------
+## ---- Configuração NPCS Compra/Venda ----
+##-------------------------------------------------------------------------------------
+#sub obterNpcDaCidade {
+#    my $cidade = "prontera";
+#    my %npc = (
+#        prontera  => ["prontera", 29, 207],
+#        payon     => ["payon_in01", 5,  49],
+#        morocc    => ["morocc",  146, 103],
+#        geffen    => ["geffen_in",  77, 167],
+#    );
+#    my $dados = $npc{$cidade} // $npc{prontera};
+#    return { mapa => $dados->[0], x => $dados->[1], y => $dados->[2] };
+#}
+#
+##-------------------------------------------------------------------------------------
+## ---- COMPRA DE POÇÕES ----
+##-------------------------------------------------------------------------------------
+#automacro VerificarPocoes {
+#    timeout    10
+#    InInventory "Poção Amarela" <= 10
+#    Zeny > 5000
+#    BaseLevel > 0
+#    priority   5
+#    exclusive 1
+#    call VerificarPocoes
+#}
+#
+#macro VerificarPocoes {
+#    %paramHash = %{ configurarParametrosUsuario() }
+#    $pocao   = $paramHash{pocaoParaUsar}
+#    $minPot  = $paramHash{minPocao}
+#    $zenyNec = $paramHash{zenyMinPot}
+#
+#    if (&invamount($pocao) <= $minPot) && ($.zeny > $zenyNec) call comprarPocoes
+#    if (&invamount($pocao) > $minPot) log Não preciso comprar poções agora.
+#}
+#
+#macro comprarPocoes {
+#    %paramHash = %{ configurarParametrosUsuario() }
+#    %npc = obterNpcDaCidade()
+#
+#    $asaNome = $paramHash{asaRetorno}
+#
+#    if ($paramHash{usarAsaParaCompra}) && ($.map ne $npc{mapa}) && (&invamount($asaNome) > 0) call usarAsaCompra
+#
+#    log ============================================
+#    log Comprando $paramHash{pocaoParaUsar} no NPC ($npc{mapa} $npc{x} $npc{y})
+#    log Objetivo: min $paramHash{minPocao} / max $paramHash{maxPocao}
+#    log ============================================
+#
+#    do move $npc{mapa} $npc{x} $npc{y}
+#    do conf buyAuto_0 $paramHash{pocaoParaUsar}
+#    do conf buyAuto_0_minAmount $paramHash{minPocao}
+#    do conf buyAuto_0_maxAmount $paramHash{maxPocao}
+#    do conf buyAuto_0_npc $npc{mapa} $npc{x} $npc{y}
+#    do conf buyAuto_0_disabled 0
+#    do conf useSelf_item_0 $paramHash{pocaoParaUsar}
+#    do conf useSelf_item_0_hp < $paramHash{hpParaUsarPocao}%
+#
+#    call checkPesoEVender
+#}
+#
+#macro usarAsaCompra {
+#    log Usando $paramHash{asaRetorno} para retornar antes da compra...
+#    do use $paramHash{asaRetorno}
+#    pause 6
+#}
+#
+##-------------------------------------------------------------------------------------
+## ---- VENDA DE ITENS ----
+##-------------------------------------------------------------------------------------
+#automacro venderLootPeso {
+#    BaseLevel > 0
+#    JobLevel >= 1
+#    timeout   180
+#    exclusive 0
+#    priority  3
+#    call checkPesoEVender
+#}
+#
+#macro checkPesoEVender {
+#    %paramHash = %{ configurarParametrosUsuario() }
+#    if ($.weightpercent >= $paramHash{pesoParaVender}) call venderLoot
+#    if ($.weightpercent <  $paramHash{pesoParaVender}) log Peso OK ($.weightpercent% < $paramHash{pesoParaVender}%)
+#}
+#
+#macro venderLoot {
+#    %paramHash = %{ configurarParametrosUsuario() }
+#    %npc = obterNpcDaCidade()
+#
+#    $asaNome = $paramHash{asaRetorno}
+#
+#    if ($paramHash{usarAsaParaCompra}) && ($.map ne $npc{mapa}) && (&invamount($asaNome) > 0) call usarAsaVenda
+#
+#    log ============================================
+#    log Vendendo loot em $npc{mapa} $npc{x} $npc{y} (peso $.weightpercent%)
+#    log Itens a vender definidos em items_control.txt
+#    log ============================================
+#
+#    do move $npc{mapa} $npc{x} $npc{y}
+#    do conf sellAuto_npc $npc{mapa} $npc{x} $npc{y}
+#    do autosell
+#    log Venda executada. Peso agora: $.weightpercent%
+#}
+#
+#macro usarAsaVenda {
+#    log Usando $paramHash{asaRetorno} para retornar antes da venda...
+#    do use $paramHash{asaRetorno}
+#    pause 6
+#}
+
+automacro aplicar_cicuta {
+	InInventory "Cicuta" > 0
+	timeout 300
+	call {
+		log [Cicuta] Aplicando toxina Cicuta...
+		pause 1
+		do ss 2027 5
+        pause 0.8
+        log [Cicuta] Aplicado...
+	}
+}

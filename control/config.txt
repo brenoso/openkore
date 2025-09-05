@@ -4,11 +4,11 @@
 ######## Login options and server-specific options ########
 
 master Latam - ROla: Freya/Nidhogg/Yggdrasil
-server
-username
-password
-loginPinCode
-char
+server 0
+username 
+password 
+loginPinCode 0103
+char 1
 otpSeed
 
 # Poseidon Settings: https://openkore.com/wiki/Poseidon
@@ -20,30 +20,31 @@ poseidonTimeout 5
 bindIp
 forceMapIP
 
+# RECV Checksum Solver
+ip_socket 172.65.175.70
+port_socket 2349
+
 # 1 = hook into RO client, 2 = Act as stand-alone proxy, proxy = act as true proxy
 # https://openkore.com/wiki/XKore
-XKore 0
+XKore 3
 XKore_port 2350
 XKore_dll NetRedirect.dll
 XKore_injectDLL 0
-XKore_autoAttachIfOneExe 0
+XKore_autoAttachIfOneExe 1
 XKore_silent 1
 XKore_bypassBotDetection 0
 XKore_exeName ragexe.exe
 
-# XKore 1 / Proxy configuration
-XKore_hookIp 127.0.0.1
-XKore_hookport 2350
-
 # XKore 2 / Proxy configuration
-XKore_listenIp 127.0.0.1
+# XKore_listenIp 0.0.0.0
+XKore_listenIp 172.65.175.70
 XKore_listenPort 6901
-XKore_publicIp 127.0.0.1
+XKore_publicIp 172.65.175.70
 XKore_ID
 
 # It is not advised to set secureAdminPassword if you're using Xkore 2
 secureAdminPassword 1
-adminPassword
+adminPassword cekeatwe
 callSign
 commandPrefix ;
 callSignGM 0
@@ -61,12 +62,25 @@ whenInGame_requestCashPoints 0
 
 message_length_max 80
 
+####################################
+####################################
 ######## Main configuration ########
-
+####################################
+####################################
 alias_heal sp 28
 
 allowedMaps
 allowedMaps_reaction 1
+
+useSelf_item Poção Vermelha {
+	hp < 60%
+	timeout 1
+}
+
+useSelf_item Laranja {
+	sp < 10%
+	timeout 1
+}
 
 attackAuto 2
 attackAuto_party 1
@@ -82,8 +96,9 @@ attackDistance 1
 attackDistanceAuto 1
 attackMaxDistance 1
 attackMaxRouteTime 4
+attackMaxRouteDistance 14
 attackMinPlayerDistance 2
-attackMinPortalDistance 4
+attackMinPortalDistance 10
 attackUseWeapon 1
 attackNoGiveup 0
 attackCanSnipe 0
@@ -212,7 +227,7 @@ cartMaxWeight 7900
 itemsTakeGreed 0
 itemsCheckWeight 1
 
-lockMap
+lockMap pay_fild02
 lockMap_x
 lockMap_y
 lockMap_randX
@@ -222,13 +237,13 @@ route_escape_reachedNoPortal 1
 route_escape_randomWalk 1
 route_escape_shout
 route_avoidWalls 1
-route_randomWalk 1
+route_randomWalk 0
 route_randomWalk_inTown 0
 route_randomWalk_maxRouteTime 75
 route_maxWarpFee
 route_maxNpcTries 5
-route_teleport 0
-route_teleport_minDistance 75
+route_teleport 1
+route_teleport_minDistance 200
 route_teleport_maxTries 8
 route_teleport_notInMaps
 route_step 10
@@ -264,13 +279,13 @@ shop_useSkill 1
 buyerShopAuto_open 0
 buyerShop_random 0
 
-sitAuto_hp_lower 40
-sitAuto_hp_upper 100
+sitAuto_hp_lower 0
+sitAuto_hp_upper 0
 sitAuto_sp_lower 0
 sitAuto_sp_upper 0
 sitAuto_follow 0
 sitAuto_over_50 0
-sitAuto_idle 1
+sitAuto_idle 0
 sitAuto_look
 sitAuto_look_from_wall
 sitTensionRelax 0
@@ -286,36 +301,38 @@ skillsAddAuto_list
 tankMode 0
 tankModeTarget
 
+teleportAuto_timeout 1
 teleportAuto_hp 10
 teleportAuto_sp 0
-teleportAuto_idle 0
+teleportAuto_idle 1
 teleportAuto_portal 0
 teleportAuto_search 0
 teleportAuto_minAggressives 0
 teleportAuto_minAggressivesInLock 0
 teleportAuto_onlyWhenSafe 0
-teleportAuto_maxDmg 500
+teleportAuto_maxDmg 1000
 teleportAuto_maxDmgInLock 0
 teleportAuto_deadly 1
-teleportAuto_useSkill 1
+teleportAuto_useSkill 0
 teleportAuto_useChatCommand
 teleportAuto_allPlayers 0
 teleportAuto_notPlayers
 teleportAuto_atkCount 0
-teleportAuto_atkMiss 10
-teleportAuto_unstuck 0
+teleportAuto_atkMiss 15
+teleportAuto_unstuck 1
+teleportAuto_away 0
 teleportAuto_lostTarget 0
 teleportAuto_dropTarget 0
 teleportAuto_dropTargetKS 0
 teleportAuto_dropTargetHidden 0
 teleportAuto_attackedWhenSitting 0
-teleportAuto_totalDmg 0
+teleportAuto_totalDmg 500
 teleportAuto_totalDmgInLock 0
 teleportAuto_equip_leftAccessory
 teleportAuto_equip_rightAccessory
 teleportAuto_lostHomunculus
 teleportAuto_useItemForRespawn
-teleportAuto_item1
+teleportAuto_item1 Asas de Mosquito
 teleportAuto_item2
 
 dealAuto 1
@@ -393,75 +410,6 @@ status_mapType 0
 
 monster_filter
 
-######## Mercenary Support ########
-
-mercenary_attackAuto 2
-mercenary_attackAuto_party 1
-mercenary_attackAuto_notInTown 1
-mercenary_attackAuto_inLockOnly 1
-mercenary_attackAuto_notWhile_storageAuto 1
-mercenary_attackAuto_notWhile_buyAuto 1
-mercenary_attackAuto_notWhile_sellAuto 1
-mercenary_attackAuto_considerDamagedAggressive 0
-mercenary_attackAuto_onlyWhenSafe 0
-mercenary_attackAuto_duringRandomWalk 0
-mercenary_attackAuto_duringItemsTake 0
-mercenary_attackDistance 1
-mercenary_attackMaxDistance 1
-mercenary_attackDistanceAuto 1
-mercenary_attackMaxRouteTime 4
-mercenary_attackCanSnipe 0
-mercenary_attackCheckLOS 1
-mercenary_attackRouteMaxPathDistance 20
-mercenary_attackUseWeapon 1
-mercenary_attackNoGiveup 0
-mercenary_attackChangeTarget 1
-mercenary_attack_dance_melee 0
-mercenary_attack_dance_ranged 0
-
-mercenary_attackBeyondMaxDistance_waitForAgressive 0
-mercenary_attackBeyondMaxDistance_sendAttackWhileWaiting 0
-mercenary_attackSendAttackWithMove 0
-mercenary_attackWaitApproachFinish 1
-
-mercenary_lost_teleportToMaster_maxTries 6
-
-mercenary_route_randomWalk_rescueWhenLost 0
-mercenary_route_randomWalk_stopDuringAttack 0
-mercenary_route_randomWalk_waitMinDistance 0
-
-mercenary_runFromTarget 0
-mercenary_runFromTarget_inAdvance 0
-mercenary_runFromTarget_dist 5
-mercenary_runFromTarget_minStep 7
-mercenary_runFromTarget_maxPathDistance 20
-mercenary_runFromTarget_noAttackMethodFallback 0
-mercenary_runFromTarget_noAttackMethodFallback_attackMaxDist 14
-mercenary_runFromTarget_noAttackMethodFallback_minStep 8
-
-mercenary_idleWalkType 1
-mercenary_followDistanceMin 3
-mercenary_followDistanceMax 12
-
-mercenary_moveNearWhenIdle 1
-mercenary_moveNearWhenIdle_minDistance 3
-mercenary_moveNearWhenIdle_maxDistance 8
-
-mercenary_route_step 10
-
-mercenary_tankMode 0
-mercenary_tankModeTarget
-
-mercenary_teleportAuto_hp 10
-mercenary_teleportAuto_maxDmg 500
-mercenary_teleportAuto_maxDmgInLock 0
-mercenary_teleportAuto_deadly 1
-mercenary_teleportAuto_unstuck 0
-mercenary_teleportAuto_dropTarget 0
-mercenary_teleportAuto_dropTargetKS 0
-mercenary_teleportAuto_totalDmg 0
-mercenary_teleportAuto_totalDmgInLock 0
-mercenary_teleportAuto_attackedWhenSitting 0
 
 ######## Homunculus Support ########
 
@@ -552,6 +500,34 @@ pet_return 20
 # You can copy & paste any block multiple times. So if you want to
 # configure two attack skills, just duplicate the attackSkillSlot block.
 
+attackSkillSlot Furto {
+	lvl 10
+	dist 1
+	maxDist 1
+	sp > 10
+	monsters
+	timeout 3
+	disabled 0
+	inLockOnly 0
+	notInTown 0
+	isSelfSkill 0
+	maxAttempts 1
+}
+
+#attackSkillSlot Afanar {
+#	lvl
+#	dist 1
+#	maxDist 1
+#	sp > 15
+#	monsters
+#	timeout 3
+#	disabled 0
+#	inLockOnly 0
+#	notInTown 0
+#	isSelfSkill 0
+#	maxAttempts 1
+#}
+
 attackSkillSlot {
 	lvl
 	dist 1
@@ -582,8 +558,6 @@ attackSkillSlot {
 	mercenary_whenIdle
 	mercenary_whenNotIdle
 	onAction
-    inQueue
-    notInQueue
 	whenStatusActive
 	whenStatusInactive
 	whenFollowing
@@ -666,8 +640,6 @@ doCommand {
 	mercenary_whenIdle
 	mercenary_whenNotIdle
 	onAction
-    inQueue
-    notInQueue
 	whenStatusActive
 	whenStatusInactive
 	whenFollowing
@@ -720,8 +692,6 @@ useSelf_skill {
 	mercenary_whenIdle
 	mercenary_whenNotIdle
 	onAction
-    inQueue
-    notInQueue
 	whenStatusActive
 	whenStatusInactive
 	whenFollowing
@@ -778,8 +748,6 @@ partySkill {
 	mercenary_whenIdle
 	mercenary_whenNotIdle
 	onAction
-    inQueue
-    notInQueue
 	whenStatusActive
 	whenStatusInactive
 	whenFollowing
@@ -882,8 +850,6 @@ equipAuto {
 	mercenary_whenIdle
 	mercenary_whenNotIdle
 	onAction
-    inQueue
-    notInQueue
 	whenStatusActive
 	whenStatusInactive
 	whenFollowing
@@ -927,8 +893,6 @@ useSelf_item {
 	mercenary_whenIdle
 	mercenary_whenNotIdle
 	onAction
-    inQueue
-    notInQueue
 	whenStatusActive
 	whenStatusInactive
 	whenFollowing
@@ -985,7 +949,7 @@ storageAuto_maxDistance
 storageAuto_npc_type 1
 storageAuto_type 0
 storageAuto_npc_steps
-storageAuto_password
+storageAuto_password 0103
 storageAuto_keepOpen 0
 storageAuto_useChatCommand
 storageAuto_useItem 0

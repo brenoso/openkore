@@ -13,7 +13,7 @@ use Task::CalcMapRoute;
 sub start {
 	print "### Starting FieldTest\n";
 	
-	local *Settings::getFieldsFolders = sub { return grep -d, qw(../../../../fieldpack/trunk/fields ../../fields) };
+	($Settings::fields_folder) = grep -d, qw(../../../../fieldpack/trunk/fields ../../fields);
 	
 	parseROLUT('resnametable.txt', \%mapAlias_lut, 1, ".gat");
 	parseROLUT('maps.txt', \%maps_lut);

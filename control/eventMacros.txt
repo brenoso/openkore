@@ -1,0 +1,34 @@
+#automacro EnviarMorangoRodex {
+#    timeout    120
+#    InInventory "Morango" >= 450
+#    Zeny > 5000
+#    BaseLevel > 0
+#    priority   5
+#    exclusive 1
+#    call enviarMorango
+#}
+#
+#macro enviarMorangoRodexM {
+#    if ((@invamount(Morango) >= 450) && ($.zeny > 5000)) {
+#        call enviarMorango
+#    } else {
+#        log Não preciso enviar morango agora.
+#    }
+#}
+#
+#macro enviarMorango {
+#    log Enviando Morango...
+#    log item @inventory(Morango)
+#    log qnt @invamount(Morango)
+#    log Enviando Morango...
+#
+#    do rodex open
+#    do rodex write Romana
+#    do rodex settitle abcdefg
+#    do rodex setbody abcdefg
+#    do rodex add 0 450
+#    do rodex send
+#    do rodex close
+#    pause 25
+#    do reload macros.txt
+#}

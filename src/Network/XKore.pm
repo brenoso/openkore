@@ -19,25 +19,13 @@ use base qw(Exporter);
 use Exporter;
 use IO::Socket::INET;
 use Time::HiRes qw(time usleep);
-BEGIN {
-    if ($^O eq 'MSWin32') {
-        require Win32;
-        Win32->import();
-    }
-}
-
+use Win32;
 use Exception::Class ('Network::XKore::CannotStart');
 
 use Modules 'register';
 use Globals;
 use Log qw(message error debug);
-BEGIN {
-    if ($^O eq 'MSWin32') {
-        require Utils::Win32;
-        Utils::Win32->import();
-    }
-}
-
+use Utils::Win32;
 use Network;
 use Network::Send ();
 use Utils qw(dataWaiting timeOut);
@@ -53,13 +41,13 @@ my $currentClientKey = 0;
 # Initialize X-Kore mode. Throws Network::XKore::CannotStart on error.
 sub new {
 	my $class = shift;
-	my $port = $config{XKore_hookport} || 2350;
+	my $port = $config{XKore_port} || 2350;
 	my $self = bless {}, $class;
 
 	undef $@;
 	$self->{server} = new IO::Socket::INET->new(
 		Listen		=> 5,
-		LocalAddr	=> $config{XKore_hookIp} || 'localhost',
+		LocalAddr	=> 'localhost',
 		LocalPort	=> $port,
 		Proto		=> 'tcp');
 	if (!$self->{server}) {
@@ -276,7 +264,6 @@ sub checkConnection {
 	Plugins::callHook('XKore_start');
 	while ($loop) {
 		undef @list;
-	if ($^O eq 'MSWin32') {
 		my @z = Utils::Win32::listProcesses();
 
 		foreach (@z) {
@@ -284,11 +271,6 @@ sub checkConnection {
 				push @list, {exe => $_->{'exe'}, pid => $_->{'pid'}};
 			}
 		}
-	} else {
-		# Em Linux, não dá pra listar processos do Windows
-		last;
-	}
-
 
 		if (@list == 0) {
 			# no process, wait for start

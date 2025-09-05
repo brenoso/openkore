@@ -570,13 +570,8 @@ sub processServerSettings {
 	}
 
 	# Process adding Custom Table folders
-	if ($masterServer->{addTableFolders}) {
+	if($masterServer->{addTableFolders}) {
 		Settings::addTablesFolders($masterServer->{addTableFolders});
-	}
-
-	# Process adding Custom fields folders
-	if ($masterServer->{addFieldsFolders}) {
-		Settings::addFieldsFolders($masterServer->{addFieldsFolders});
 	}
 
 	# Process setting custom recvpackets option
@@ -1108,6 +1103,16 @@ sub parseInput {
 		$interface->writeOutput("console", "$input\n");
 	}
 	$XKore_dontRedirect = 1;
+
+	# if ($input =~ /^craft poison\s+"?(.+?)"?$/i) {
+	# 	my $poison = $1;
+	# 	if (!$poison) {
+	# 		error "Uso: craft poison \"Nome da Toxina\"\n";
+	# 		return;
+	# 	}
+	# 	Commands::run("c $poison");
+	# 	return;
+	# }
 
 	Commands::run($input);
 
