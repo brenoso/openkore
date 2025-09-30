@@ -1,0 +1,58 @@
+#automacro EnviarMorangoRodex {
+#    timeout    120
+#    InInventory "Morango" >= 50
+#    Zeny > 5000
+#    BaseLevel > 0
+#    priority   5
+#    exclusive 1
+#    call enviarMorango
+#}
+#
+#macro enviarMorango {
+#    do rodex open
+#    do rodex write Romana
+#    do rodex settitle abcdefg
+#    do rodex setbody abcdefg
+#    do rodex add 13 50
+#    do rodex send
+#    do rodex close
+#    pause 25
+#    do reload macros.txt
+#}
+
+automacro AvisoGMsec_pri {
+    InMap sec_pri
+    call {
+        do eval Utils::Win32::playSound('assets\audio\alarm-siren.wav')
+        log TU TA PRESO COM O GM !!! TU TA PRESO COM O GM !!! TU TA PRESO COM O GM !!!TU TA PRESO COM O GM !!!TU TA PRESO COM O GM !!!TU TA PRESO COM O GM !!!TU TA PRESO COM O GM !!!TU TA PRESO COM O GM !!!TU TA PRESO COM O GM !!!TU TA PRESO COM O GM !!!TU TA PRESO COM O GM !!!TU TA PRESO COM O GM !!!TU TA PRESO COM O GM 
+    }
+}
+
+####################################
+####################################
+########## Rota de UP ##############
+####################################
+####################################
+
+#automacro vaihode {
+#	BaseLevel = 55 .. 70
+#	call vaihodes
+#    run-once 1
+#}
+#
+#macro vaihodes {
+#	do conf lockMap moc_fild17
+#	release vaiflypetits
+#}
+#
+#automacro vaiflypetits {
+#	BaseLevel = 71 .. 99
+#	run-once 1
+#	overrideAI 1
+#	exclusive 1
+#	call flypetits
+#}
+#
+#macro flypetits {
+#	do conf lockMap gef_fild08
+#}

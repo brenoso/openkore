@@ -12,11 +12,6 @@
 # Itens Gerais
 all 1
 
-# Evento
-Macarrão Gravatinha 2
-Moeda Ravioli 2
-Macarrão Parafuso 2
-
 # Mapa Tatacho
 Chifre de Leão da Montanha 2
 Chapéu Pontudo 2
@@ -38,7 +33,7 @@ Erva Azul 1
 Erva Branca 1
 Ferrão de Abelha 1
 
-# Jogar fora se pegar (Furto)
+# Não pegar / jogar fora se pegar (Furto)
 Escamas de Cobra -1
 Escama Afiada -1
 Esporo de Cogumelo -1
@@ -53,6 +48,10 @@ Crisálida -1
 Jellopy -1
 Pele de Verme -1
 Fracon -1
+Carne Estragada -1
+Vale-Teletransporte -1
+25313 -1
+25311 -1
 
 # Cartas MVP/Mini-boss/Altíssimo valor
 Carta Creamy 1

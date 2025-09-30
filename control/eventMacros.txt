@@ -1,34 +1,103 @@
-#automacro EnviarMorangoRodex {
-#    timeout    120
-#    InInventory "Morango" >= 450
-#    Zeny > 5000
-#    BaseLevel > 0
-#    priority   5
-#    exclusive 1
-#    call enviarMorango
+#automacro checkQuantity {
+#    #nInventoryID 1032 >= 1
+#    Zeny >= 12500
+#    CharCurrentWeight > 9%
+#    timeout 60
+#    call enviarRodex
 #}
 #
-#macro enviarMorangoRodexM {
-#    if ((@invamount(Morango) >= 450) && ($.zeny > 5000)) {
-#        call enviarMorango
-#    } else {
-#        log Não preciso enviar morango agora.
-#    }
-#}
-#
-#macro enviarMorango {
-#    log Enviando Morango...
-#    log item @inventory(Morango)
-#    log qnt @invamount(Morango)
-#    log Enviando Morango...
-#
+#macro enviarRodex {
+#    $mailTitle = Farmado
+#    $mailBody = Olá, Chegaram seus itens.
+#    $target = Romana
+#    $amount = 1
 #    do rodex open
-#    do rodex write Romana
-#    do rodex settitle abcdefg
-#    do rodex setbody abcdefg
-#    do rodex add 0 450
+#    do rodex write $target
+#    do rodex settarget $target
+#    do rodex settitle $mailTitle
+#    do rodex setbody $mailBody
+#    do rodex setzeny 0
+#
+#    do rodex add &inventory(1032) &invamount(1032) # Flor de Planta Carnivora
+#    do rodex add &inventory(7097) &invamount(7097) # Coração Incandescente
+#    do rodex add &inventory(1036) &invamount(1036) # Escama de Dragão
+#    do rodex add &inventory(1035) &invamount(1035) # Canino de Dragão
+#    do rodex add &inventory(912) &invamount(912) # Zargonio
+#
 #    do rodex send
 #    do rodex close
-#    pause 25
 #    do reload macros.txt
+#}
+
+####################################
+####################################
+######## Swordsman Macro ###########
+####################################
+####################################
+
+automacro HP_Baixo {
+    CurrentHP < 90%
+    exclusive 1
+    timeout 15
+    call move_to_sacer 
+}
+
+automacro HP_subiu {
+    CurrentHP > 90%
+    timeout 10
+    exclusive 1
+    call RESTAURAR_CONFIG
+}
+
+macro move_to_sacer  {
+    do conf follow 1
+    do conf followBot 1
+    do conf followTarget Romana
+}
+
+macro RESTAURAR_CONFIG {
+    do conf follow 0
+    do conf followBot 0
+}
+
+####################################
+####################################
+########## Rota de UP ##############
+####################################
+####################################
+
+#automacro vaihode {
+#	BaseLevel = 55 .. 70
+#	call vaihodes
+#    run-once 1
+#}
+#
+#macro vaihodes {
+#	do conf lockMap moc_fild17
+#	release vaiflypetits
+#}
+#
+#automacro vaiflypetits {
+#	BaseLevel = 71 .. 89
+#	run-once 1
+#	overrideAI 1
+#	exclusive 1
+#	call flypetits
+#}
+#
+#macro flypetits {
+#	do conf lockMap gef_fild08
+#    #release vaimagdun
+#}
+
+#automacro vaimagdun {
+#	BaseLevel = 90 .. 99
+#	run-once 1
+#	overrideAI 1
+#	exclusive 1
+#	call magdun
+#}
+#
+#macro magdun {
+#	do conf lockMap mag_dun01
 #}

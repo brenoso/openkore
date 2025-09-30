@@ -10,10 +10,9 @@
 #Use the item name "all" to tell kore to pickup or not pickup all items by default
 
 # Itens Gerais
-all 0 # NÃO pegar nada por padrão!
+all 1 # NÃO pegar nada por padrão!
 Morango 2
 Esporo Venenoso 1
-Canino Venenoso 1
 Espinho de Cacto 1
 Ferrão de Abelha 1
 Karvodailnirol 2
@@ -25,6 +24,7 @@ Erva Branca 1
 Ferrão de Abelha 1
 
 # Jogar fora se pegar (Furto)
+Canino Venenoso -1
 Escamas de Cobra -1
 Escama Afiada -1
 Esporo de Cogumelo -1
