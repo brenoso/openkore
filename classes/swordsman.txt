@@ -1,0 +1,53 @@
+#################################################################
+#                          COMPORTAMENTO                        #
+#################################################################
+
+lockMap gef_fild08
+route_teleport 0
+route_randomWalk 1
+attackAuto 2
+attackAuto_party 1
+
+follow
+followTarget
+followEmotion 1
+followEmotion_distance 4
+followFaceDirection 0
+followDistanceMax 6
+followDistanceMin 3
+followLostStep 12
+followSitAuto 0
+followBot 0
+
+#################################################################
+#                          HABILIDADES                          #
+#################################################################
+
+skillsAddAuto 1
+skillsAddAuto_list SM_SWORD 10, SM_TWOHAND 10, SM_RECOVERY 10, SM_BASH 10, MS_MAGNUM 10, MER_PROVOKE 10, SM_ENDURE 10 
+
+statsAddAuto 1
+statsAddAuto_list 20 str, 20 agi, 20 dex, 20 vit, 99 for, 99 agi, 99 vit
+statsAddAuto_dontUseBonus 1
+statsAdd_over_99 1
+
+useSelf_skill SM_ENDURE {
+	sp > 10
+	stopWhenHit 1
+	notWhileSitting 1
+	notInTown 1
+	whenStatusInactive Vigor
+	timeout 30
+}
+
+attackSkillSlot SM_BASH {
+	lvl 15
+	dist 1
+	maxDist 1
+	sp > 22
+	monsters
+	disabled 0
+	inLockOnly 0
+	notInTown 0
+    timeout 0
+}

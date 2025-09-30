@@ -1,0 +1,43 @@
+#################################################################
+#                          COMPORTAMENTO                        #
+#################################################################
+
+route_teleport 1
+route_randomWalk 0
+attackAuto 2
+
+follow 0
+followTarget
+followEmotion 1
+followEmotion_distance 4
+followFaceDirection 0
+followDistanceMax 6
+followDistanceMin 3
+followLostStep 12
+followSitAuto 0
+followBot 0
+
+#################################################################
+#                          HABILIDADES                          #
+#################################################################
+
+skillsAddAuto 1
+skillsAddAuto_list AL_HEAL 10, MG_SRECOVERY 10, PR_MAGNIFICAT 5, PR_STRECOVERY 1, PR_KYRIE 10, PR_GLORIA 5, ALL_RESURRECTION 4, PR_IMPOSITIO 5, PR_SUFFRAGIUM 3, PR_ASPERSIO 5, PR_SANCTUARY 10
+statsAddAuto 1
+statsAddAuto_list 10 str, 10 dex, 10 agi, 20 int, 20 dex, 20 agi, 30 dex, 50 int, 50 dex, 80 int, 30 vit, 50 agi, 90 int
+statsAddAuto_dontUseBonus 1
+statsAdd_over_99 0
+
+attackSkillSlot Furto {
+	lvl 10
+	dist 1
+	maxDist 1
+	sp > 10
+	monsters
+	timeout 3
+	disabled 0
+	inLockOnly 0
+	notInTown 0
+	isSelfSkill 0
+	maxAttempts 1
+}
