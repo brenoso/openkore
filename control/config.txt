@@ -68,7 +68,7 @@ message_length_max 80
 ####################################
 ####################################
 
-!include ../build/swordsman.txt
+!include ../classes/bard.txt
 
 alias_heal sp 28
 

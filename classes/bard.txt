@@ -1,0 +1,47 @@
+#################################################################
+#                          COMPORTAMENTO                        #
+#################################################################
+
+lockMap
+route_teleport 0
+route_randomWalk 0
+attackAuto 0
+attackAuto_party 0
+
+follow 1
+followTarget Garanha
+followEmotion 1
+followEmotion_distance 4
+followFaceDirection 0
+followDistanceMax 6
+followDistanceMin 3
+followLostStep 12
+followSitAuto 0
+followBot 0
+
+#################################################################
+#                          HABILIDADES                          #
+#################################################################
+
+skillsAddAuto 1
+# sacer
+#skillsAddAuto_list AL_HEAL 10, MG_SRECOVERY 10, PR_MAGNIFICAT 5, PR_STRECOVERY 1, PR_KYRIE 10, PR_GLORIA 5, ALL_RESURRECTION 4, PR_IMPOSITIO 5, PR_SUFFRAGIUM 3, PR_ASPERSIO 5, PR_SANCTUARY 10
+
+# noviço
+skillsAddAuto_list AL_HEAL 10, AL_INCAGI 9, AL_DP 5, AL_BLESSING 10, AL_ANGELUS 10, AL_DP 5, AL_RUWACH 1, AL_TELEPORT 1
+
+statsAddAuto 1
+statsAddAuto_list 10 str, 10 dex, 10 agi, 100 int, 20 agi, 70 dex, 80 int, 30 vit, 50 agi, 90 int, 40 dex
+statsAddAuto_dontUseBonus 1
+statsAdd_over_99 1
+
+### SELF ###
+
+useSelf_item Morango {
+	sp < 30%
+	whenStatusInactive
+	notWhileSitting 0
+	timeout 0
+}
+
+### PARTY ###

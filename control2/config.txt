@@ -68,7 +68,7 @@ message_length_max 80
 ####################################
 ####################################
 
-!include ../build/priest.txt
+!include ../classes/dancer.txt
 
 alias_heal sp 28
 
